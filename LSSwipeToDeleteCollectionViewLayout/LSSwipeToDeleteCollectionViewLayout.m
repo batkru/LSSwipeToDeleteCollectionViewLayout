@@ -224,7 +224,7 @@ static NSString * const kLSCollectionViewKeyPath = @"collectionView";
             break;
         }
             
-        
+            
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:
@@ -395,6 +395,11 @@ static NSString * const kLSCollectionViewKeyPath = @"collectionView";
 
 -(CGFloat)velocityMagnitude{
     
+    return fabsf([self velocity]);
+}
+
+-(CGFloat)velocity{
+    
     CGPoint velocity = [self.panGestureRecognizer velocityInView:[self.panGestureRecognizer view]];
     CGFloat velocityValue = 0.0f;
     
@@ -403,8 +408,8 @@ static NSString * const kLSCollectionViewKeyPath = @"collectionView";
     }else if (self.scrollDirection == UICollectionViewScrollDirectionHorizontal){
         velocityValue = velocity.y;
     }
+    return velocityValue;
     
-    return fabsf(velocityValue);
 }
 
 -(LSSwipeToDeleteDirection)swipeToDeleteDirectionFromValue:(CGPoint)value{
@@ -436,7 +441,7 @@ static NSString * const kLSCollectionViewKeyPath = @"collectionView";
     if (userTriggerredSwipeToDeleteVelocityDirection == LSSwipeToDeleteDirectionNone) {
         inDeletionDirection = NO;
     }
-
+    
     return inDeletionDirection;
 }
 
